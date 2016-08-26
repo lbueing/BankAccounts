@@ -61,10 +61,10 @@ module Bank
      return @balance
     end
     def self.store_info
+      i = 0
       CSV.open("support/accounts.csv", "r").each do |line|
-        Owner.all.each do |i|
-          @@account_info << Bank::Account.new(id: line[0], balance: line[1], open_date: line[2], owner_info: i)
-        end
+          @@account_info << Bank::Account.new(id: line[0], balance: line[1], open_date: line[2], owner_info: Owner.all[i])
+          i +=1
       end
     end
     #This method prints all account information. store_info needs to be called before this method will work b/c otherwise @@account_info is empty. Otherwise the currently commented out self.all will work on it's own.
